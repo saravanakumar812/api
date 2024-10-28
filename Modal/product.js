@@ -8,11 +8,6 @@ const productSchema = new mongoose.Schema({
   image: {
     type: String, // URL of the image
     required: true
-  },
-
-  createdAt: {
-    type: Date,
-    default: Date.now()
   }
 });
 
