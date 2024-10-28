@@ -6,12 +6,14 @@ const upload = multer();
 const {
   getAllProducts,
   getAllProductsTesting,
-  signUp
+  signUp,
+  login
 } = require("../controllers/product");
 
 router.route("/").get(getAllProducts);
 
 router.route("/testing").post(getAllProductsTesting);
 router.route("/signup").post(signUp);
+router.route("/login").post(login);
 
 module.exports = router;

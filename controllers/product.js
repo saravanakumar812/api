@@ -23,7 +23,7 @@ const signUp = async (req, res) => {
       // If user already exists, return an error message
       return res.status(400).json({
         message: "User already exists. Please try a different name.",
-        error: true,
+        error: true
       });
     }
 
@@ -37,7 +37,7 @@ const signUp = async (req, res) => {
       city: req.body.city,
       state: req.body.state,
       pincode: req.body.pincode,
-      country: req.body.country,
+      country: req.body.country
     });
 
     // Save the new signup document
@@ -47,15 +47,63 @@ const signUp = async (req, res) => {
     res.status(200).json({
       message: "Sign Up Successfully",
       error: false,
-      userId: result.userId,
+      userId: result.userId
     });
   } catch (err) {
     // Error response
     console.error(err);
     res.status(500).json({
       message: "An error occurred during signup",
-      error: err,
+      error: err
     });
   }
 };
-module.exports = { getAllProducts, getAllProductsTesting, signUp };
+
+const login = async (req, res) => {
+  try {
+    const check = await Signup.findOne({ email: req.body.email });
+
+    if (check) {
+      // If the user exists, check the password
+      if (check.password === req.body.password) {
+        res.status(200).json({
+          message: "Login Successfully",
+          error: false,
+          data: {
+            userId: check.userId,
+            name: check.name,
+            email: check.email,
+            password: check.password,
+            phoneNumber: check.phoneNumber,
+            address: check.address,
+            city: check.city,
+            state: check.state,
+            country: check.country,
+            pincode: check.pincode
+
+            // any other data you want to send back
+          }
+        });
+      } else {
+        // If the password does not match
+        res.status(400).json({
+          message: "Incorrect password",
+          error: true
+        });
+      }
+    } else {
+      // If no user is found
+      res.status(404).json({
+        message: "User not found",
+        error: true
+      });
+    }
+  } catch (e) {
+    // Handle any other errors
+    res.status(500).json({
+      message: "An error occurred during login",
+      error: e
+    });
+  }
+};
+module.exports = { getAllProducts, getAllProductsTesting, signUp, login };
