@@ -13,6 +13,8 @@ const connectDB = require("./db/connect");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use("/foods", express.static("foods"));
+
 app.use("/foods", product_routes);
 app.use("/login", login);
 app.use("/signup", signUp);
