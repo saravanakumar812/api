@@ -6,7 +6,7 @@ const router = express.Router();
 // Configure multer to store images in an 'uploads' directory
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../uploads");
+    cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -29,7 +29,7 @@ const upload = multer({
 // Route to handle product creation with an image
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    const imageUrl = req.file ? `../uploads/${req.file.filename}` : null;
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     const food = new Food({
       foodName: req.body.foodName,
