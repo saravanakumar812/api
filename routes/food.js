@@ -29,7 +29,7 @@ const upload = multer({
 // Route to handle product creation with an image
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    const imageUrl = req.file ? `../uploads/${req.file.filename}` : null;
+    const imageUrl = req.file ? `${req.file.filename}` : null;
 
     const food = new Food({
       foodName: req.body.foodName,
