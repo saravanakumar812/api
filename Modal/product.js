@@ -5,14 +5,14 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  image: {
+    type: String, // URL of the image
+    required: true
+  },
 
   createdAt: {
     type: Date,
     default: Date.now()
-  },
-  image: {
-    type: String, // URL of the image
-    required: true
   }
 });
 
