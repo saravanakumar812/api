@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/products", product_routes);
-app.use("./uploads", express.static("./uploads"));
+app.use("/image", express.static("./uploads"));
 
 app.use("/foods", foods);
 app.use("/login", login);
