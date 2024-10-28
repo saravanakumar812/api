@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 const product_routes = require("./routes/product");
 const signUp = require("./routes/signup");
+const foods = require("./routes/food");
 const login = require("./routes/login");
 
 const connectDB = require("./db/connect");
@@ -13,9 +14,9 @@ const connectDB = require("./db/connect");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/foods", express.static("foods"));
+app.use("/products", product_routes);
 
-app.use("/foods", product_routes);
+app.use("/foods", foods);
 app.use("/login", login);
 app.use("/signup", signUp);
 
