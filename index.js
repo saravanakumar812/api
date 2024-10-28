@@ -5,6 +5,7 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 const product_routes = require("./routes/product");
+
 const connectDB = require("./db/connect");
 
 app.use(express.urlencoded({ extended: true }));
